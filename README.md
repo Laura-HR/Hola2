@@ -1,11 +1,11 @@
 # Nombre Del Juego
-Universidad URJC
+Universidad URJC  
 Práctica: Juegos En Red
 
-**1. Descripción del Juego**:
+###1. Descripción del Juego:
 El juego a presentar "Nombre del Juego". Es un juego de temática similar a Qix y consiste en que dos jugadores o más se retarán por reclamar la mayor área del tablero en un tiempo determinado.
 
-**2. Reglas/funcionalidades del juego**:
+###2. Reglas/funcionalidades del juego**:
   * El tiempo de cada partida es de 2 minutos.
   * Cada jugador tiene un color que le representa y el área que cree se pintará del colo del jugador que la haya dibujado.
   * Máximo 5 jugadores.
@@ -16,7 +16,7 @@ El juego a presentar "Nombre del Juego". Es un juego de temática similar a Qix 
   * Existen enemigos que pueden eliminar al jugador. Estos enemigos no pueden cruzar dentro del área
   * Si un jugador atrapa a un enemigo dentro del área, el enemigo desaparece.
 
-**Integrantes**
+###3.Integrantes:
 Nombre: Luis Barreto Peralta
 Correo Universidad: -
 Cuenta en GitHub: -
