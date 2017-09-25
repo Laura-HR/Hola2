@@ -1,5 +1,4 @@
 # Nombre Del Juego
-___
 Universidad URJC  
 Práctica: Juegos En Red
 ----
