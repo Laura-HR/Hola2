@@ -20,7 +20,7 @@ El juego a presentar "Nombre del Juego". Es un juego de temática similar a Qix 
   * Si un jugador atrapa a un enemigo dentro del área mientras la dibuja, el enemigo desaparece.
 
 ### 3.Integrantes:
-Nombre: -
+Nombre: -  
 Correo Universidad: -  
 Cuenta en GitHub: -  
 
