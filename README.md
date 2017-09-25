@@ -26,5 +26,5 @@ Cuenta en GitHub: -
 
 Nombre: Laura Hernández Román  
 Correo Universidad: l.hernandezroma@alumnos.urjc.es  
-Cuenta en GitHub: LAURA-HR  
+Cuenta en GitHub: Laura-HR  
 
