@@ -3,25 +3,24 @@ Universidad URJC
 Práctica: Juegos En Red
 
 ### 1. Nombre y breve descripción del Juego:
-El juego a presentar "Nombre del Juego". Es un juego de temática similar a Qix y consiste en que dos jugadores o más se retarán por reclamar la mayor área del tablero en un tiempo determinado.
+El juego a presentar "Nombre del Juego". Es un juego de temática similar a Qix y Xonix que consiste en que dos jugadores o más se retarán por reclamar la mayor área del tablero en un tiempo determinado.
 
-### 2. Reglas/funcionalidades del juego**:
-  * Máximo 5 jugadores.
+### 2. Reglas/funcionalidades del juego:
   * El tiempo máximo de cada partida es de 2 minutos.
+  * Máximo 5 jugadores.
   * Cada jugador tendrá un color específico que le represente.
-  * El área que pinte el jugador será del mismo color que el del respectivo jugador.
-  * Se maneja a los jugadores con el teclado.
-  * Cada jugador tiene una puntuación dependiendo de la cantidad de área que haya reclamado.
+  * Manejo de los jugadores por teclado con movimientos arriba/abajo y derecha/izquierda.
+  * Al final de cada partida se muestra la puntuación (o porcentaje) de cada jugador en función del área que haya conseguido.
   * El área del jugador es zona segura para el mismo.
-  * El juego mostrará por pantalla las puntuaciopnes finales ordenadas de mayor a menor a todos lo jugadores.
-  * Un jugador puede "eliminar" a otro si este está fuera de su área (zona segura) y el primer jugador choca contra la línea que dibuja.
-  * Si un jugador es "eliminado" se reinicia su área cero.
+  * Un jugador puede "eliminar" a otro si el primero colisiona contra la línea que dibuja el segundo jugador mientras se encuentra fuera de su área.
+  * Si un jugador es "eliminado" se reinicia su área a cero.
   * Existen potenciadores para los jugadores (mayor velocidad, etc).
-  * Existen enemigos que pueden eliminar al jugador. Estos enemigos no pueden cruzar dentro del área de los jugadores.
-  * Si un jugador atrapa a un enemigo dentro del área, el enemigo desaparece.
+  * Existen enemigos que pueden eliminar a los jugadores al colisionar contra ellos.
+  * Los enemigos no pueden desplazarse por las áreas de los jugadores.
+  * Si un jugador atrapa a un enemigo dentro del área mientras la dibuja, el enemigo desaparece.
 
 ### 3.Integrantes:
-Nombre: Luis Barreto Peralta  
+Nombre: -
 Correo Universidad: -  
 Cuenta en GitHub: -  
 
