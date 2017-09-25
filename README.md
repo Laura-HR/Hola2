@@ -9,7 +9,7 @@ El juego a presentar "Nombre del Juego". Es un juego de temática similar a Qix 
   * El tiempo máximo de cada partida es de 2 minutos.
   * Máximo 5 jugadores.
   * Cada jugador tendrá un color específico que le represente.
-  * Manejo de los jugadores por teclado con movimientos arriba/abajo y derecha/izquierda.
+  * Manejo de los jugadores por teclado con movimientos arriba/abajo y izquierda/derecha.
   * Al final de cada partida se muestra la puntuación (o porcentaje) de cada jugador en función del área que haya conseguido.
   * El área del jugador es zona segura para el mismo.
   * Un jugador puede "eliminar" a otro si el primero colisiona contra la línea que dibuja el segundo jugador mientras se encuentra fuera de su área.
