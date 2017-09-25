@@ -1,1 +1,3 @@
-# Hola2
+# XONIX
+# Práctica URJC Juegos En Red
+
