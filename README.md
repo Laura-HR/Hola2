@@ -1,7 +1,8 @@
 # Nombre Del Juego
+___
 Universidad URJC  
 Práctica: Juegos En Red
-___
+----
 
 ### 1. Nombre y breve descripción del Juego:
 El juego a presentar "Nombre del Juego". Es un juego de temática similar a Qix y Xonix que consiste en que dos jugadores o más se retarán por reclamar la mayor área del tablero en un tiempo determinado.
