@@ -4,7 +4,7 @@ Práctica: Juegos En Red
 ____
 
 ### 1. Nombre y breve descripción del Juego:
-El juego a presentar es "Nombre del Juego". Es un juego de temática similar a Qix y Xonix que consiste en que dos jugadores o más se retarán por reclamar la mayor área del tablero posible en un tiempo determinado.
+El juego a presentar es *"Nombre del Juego"*. Es un juego de temática similar a *Qix* y *Xonix* que consiste en que dos jugadores o más se retarán por reclamar la mayor área del tablero posible en un tiempo determinado.
 
 ### 2. Reglas/funcionalidades del juego:
   * El tiempo máximo de cada partida es de 2 minutos.
