@@ -10,9 +10,10 @@ El juego a presentar "Nombre del Juego". Es un juego de temática similar a Qix 
   * El tiempo máximo de cada partida es de 2 minutos.
   * 2-4 jugadores.
   * Cada jugador tendrá un color específico que le represente de forma aleatoria.
-  * Manejo de los jugadores por teclado con movimientos exclusivamente horizontales y verticales.
-  * El área del jugador es zona segura para el mismo.
-  * Un jugador puede "eliminar" a otro si el primero colisiona contra la línea que dibuja el segundo mientras se encuentra fuera de su área.
+  * Controles por teclado con movimientos exclusivamente horizontales y verticales.
+  * Cuando el jugador abandona su área para aumentarla, aparece una línea tras él que representa su recorrido.
+  * El área del jugador es zona segura para él mismo.
+  * Un jugador puede "eliminar" a otro si el primero colisiona contra la línea de recorrido del segundo.
   * Si un jugador es "eliminado" se reinicia su área a cero.
   * Existen potenciadores para los jugadores (mayor velocidad, etc).
   * Existen enemigos que pueden eliminar a los jugadores al colisionar contra ellos.
