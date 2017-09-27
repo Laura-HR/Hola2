@@ -1,4 +1,4 @@
-# Nombre Del Juego
+# Snake.io
 Universidad URJC  
 Práctica: Juegos En Red
 ____
@@ -22,9 +22,9 @@ El juego a presentar es *"Nombre del Juego"* en el cual dos o más jugadores se 
   * Al final de cada partida se muestra la puntuación (o porcentaje) de cada jugador en función del área que haya conseguido.
 
 ### 3.Integrantes:
-**Nombre:** -  
-**Correo Universidad:** -  
-**Cuenta en GitHub:** -  
+**Nombre:** Luis Barreto Peralta  
+**Correo Universidad:** l.barretop@alumnos.urjc.es  
+**Cuenta en GitHub:** lbarretop
 
 **Nombre:** Laura Hernández Román  
 **Correo Universidad:** l.hernandezroma@alumnos.urjc.es  
