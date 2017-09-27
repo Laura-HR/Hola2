@@ -19,7 +19,7 @@ El juego a presentar es *"Snake.io"* en el cual dos o más jugadores se retarán
   * Existen potenciadores para los jugadores (mayor velocidad, etc).
   * Al final de cada partida se muestra la puntuación (o porcentaje) de cada jugador en función del área que haya conseguido.
 
-### 3.Integrantes:
+### 3. Integrantes:
 **Nombre:** Luis Barreto Peralta  
 **Correo Universidad:** l.barretop@alumnos.urjc.es  
 **Cuenta en GitHub:** lbarretop
