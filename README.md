@@ -12,9 +12,10 @@ El juego a presentar es *"Snake.io"* en el cual dos o más jugadores se retarán
   * Cada jugador tendrá un color específico que le represente de forma aleatoria.
   * Controles por teclado con movimientos exclusivamente horizontales y verticales.
   * Cuando el jugador abandona su área para aumentarla, aparece una línea tras él que representa su recorrido.
+  * Para aumentar el área, el jugador deberá cerrar un recinto sobre ella.
   * El área del jugador es zona segura para él mismo.
   * Un jugador puede "eliminar" a otro si el primero colisiona contra la línea de recorrido del segundo.
-  * Si un jugador es "eliminado" se reinicia su área a cero.
+  * Si un jugador es "eliminado" se reinicia su área.
   * Existen potenciadores para los jugadores (mayor velocidad, etc).
   * Existen enemigos que pueden eliminar a los jugadores al colisionar contra ellos.
   * Los enemigos no pueden desplazarse por las áreas de los jugadores.
