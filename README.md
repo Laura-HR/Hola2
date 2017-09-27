@@ -4,7 +4,7 @@ Práctica: Juegos En Red
 ____
 
 ### 1. Nombre y breve descripción del Juego:
-El juego a presentar es *"Snake.io"* en el cual dos o más jugadores se retarán por reclamar la mayor área del tablero posible en un tiempo determinado. Es un juego de temática similar a *Qix* y *Xonix*, donde se mezclan la acción y estrategia.
+El juego a presentar es *"Snake.io"* en el cual dos o más jugadores se retarán por reclamar la mayor área del tablero posible en un tiempo determinado. Es un juego de temática similar a *Qix* y *Splix.io*, donde se mezclan la acción y estrategia.
 
 ### 2. Reglas/funcionalidades del juego:
   * El tiempo máximo de cada partida es de 2 minutos.
