@@ -72,8 +72,8 @@ Método de pintar casilla(numJug, x, y){ //numJug (nº de jug), x (pos x de la c
 }
 
 Método de inicializar Partida{
- Ejecutar antes de empezar la partida.
- Se pone todo a 0 (en blanco) y -1 (los bordes del tablero) por defecto
+   Ejecutar antes de empezar la partida.
+   Se pone todo a 0 (en blanco) y -1 (los bordes del tablero) por defecto
 }
 
 Función pintar alrededor(x, y, numJug){
