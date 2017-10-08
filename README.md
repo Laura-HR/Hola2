@@ -46,7 +46,7 @@ Ahora, lo necesario a implementar es:
  
 - Tablero:
  - Representan territorio de jugadores. 
- - Representan la lína de captura de los juugadores. 
+ - Representan la línea de captura de los jugadores. 
  - Representa los bordes.
 
 - Fin del juego
