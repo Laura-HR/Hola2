@@ -53,7 +53,7 @@ Ahora, lo necesario a implementar es:
  - Tiempo límite (2 minutos). 
  
 Ahora este representado en clases y métodos que el juego tiene que tener:
-``
+```
 Clase- Tablero. 
 Array de casillas de: 
 - Array de int de territorio/casillas
@@ -167,4 +167,4 @@ Bucle de control{
    Comprobar el estado de los jugadores (colisiones, el método de comprobar si el jugador está fuera de su territorio, actualizar las puntuaciones).  
    Comprobar inputs (ej: movimiento de jugadores).  
 }  
-``
+```
