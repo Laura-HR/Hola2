@@ -53,6 +53,7 @@ Ahora, lo necesario a implementar es:
  - Tiempo límite (2 minutos). 
  
 Ahora este representado en clases y métodos que el juego tiene que tener:
+``
 Clase- Tablero. 
 Array de casillas de: 
 - Array de int de territorio/casillas
@@ -108,7 +109,6 @@ Función colisión(numJug, x, y){
    Comprobar que el jugador no está en casilla -1. Si sí, el jugador "muere". Llamar a función Reiniciar jugador(de este jugador).  
    Comprobar que el jugador no está en línea(cualquier valor). Si sí, reiniciar el jugador del cual ha chocado.  
    ej:  
-````
    colision(numJug, x, y){  
      if(array_casillas[x][y]== -1){  
      reiniciarJugador(n);  
@@ -116,8 +116,7 @@ Función colisión(numJug, x, y){
      if(array_linea[x][y]!=0){  
        reiniciarJugador(array_linea[x][y]);  
      }  
-   }  
-```
+   }
 }  
 
 Función inicializar Jugador(numJug, x, y){  
@@ -149,7 +148,6 @@ Función Capturar(n){
 Función comprobar si se está fuera y rellenar nueva área(){  
  Detectar que no está el jugador en el territorio. Empezar a pintar línea.  
  Si estoy fuera  
- ```
   if(territorio != jugador){  
     flag a true.  
     pintar linea[x][y] a jugador  
@@ -159,8 +157,7 @@ Función comprobar si se está fuera y rellenar nueva área(){
        llamar a función Capturar  
        flag a false.//Para que no calcule el capturar todo el rato cuando que el jugador se encuentra en su territorio.  
      }  
-   }    
-```
+   } 
 }  
 
 Bucle de control{  
@@ -170,3 +167,4 @@ Bucle de control{
    Comprobar el estado de los jugadores (colisiones, el método de comprobar si el jugador está fuera de su territorio, actualizar las puntuaciones).  
    Comprobar inputs (ej: movimiento de jugadores).  
 }  
+``
