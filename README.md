@@ -64,33 +64,33 @@ Array de casillas de:
 - Array de int de linea
 0 == de nadie. 
 1 == captura de jugador 1. 
-2 == captura de jugador 2.
+2 == captura de jugador 2.  
 
 Métodos de clase Tablero: 
-Método de pintar casilla(numJug, x, y){ //numJug (nº de jug), x (pos x de la casilla a pintar), y (pos y de la casilla a pintar)
- el color depende del array de territorio
-}
+   Método de pintar casilla(numJug, x, y){ //numJug (nº de jug), x (pos x de la casilla a pintar), y (pos y de la casilla a pintar)  
+ el color depende del array de territorio.   
+}  
 
-Método de inicializar Partida{
-   Ejecutar antes de empezar la partida.
-   Se pone todo a 0 (en blanco) y -1 (los bordes del tablero) por defecto
-}
+Método de inicializar Partida{  
+   Ejecutar antes de empezar la partida.  
+   Se pone todo a 0 (en blanco) y -1 (los bordes del tablero) por defecto.  
+}  
 
-Función pintar alrededor(x, y, numJug){
- Cambiar valor array territorio/casilla a numJug alreadedor de x e y.
- tiene que quedar un cuadrado de 3x3.
-}
+Función pintar alrededor(x, y, numJug){  
+   Cambiar valor array territorio/casilla a numJug alreadedor de x e y.  
+   tiene que quedar un cuadrado de 3x3.  
+}  
 
-Función borrarDeUnJugador(numJug){
- - Poner 0 todo territorio y linea de numJug
-} 
+Función borrarDeUnJugador(numJug){  
+   Poner 0 todo territorio y linea de numJug.  
+}  
 
 Función contar casillas(numJug){ 
- Recorrer todo el array de casillas y contar las casillas que pertenecen a un jugador. Devuelve contador de casillas.
+   Recorrer todo el array de casillas y contar las casillas que pertenecen a un jugador. Devuelve contador de casillas.  
 } 
 
 Función pintar línea(numJug, x, y){ 
- El color depende del array linea
+   El color depende del array linea.  
 } 
 
 Clase Jugador- Se creará un array juagdores.
@@ -99,69 +99,74 @@ Posición y.
 Puntuación.  
 Flag hay que pintar.  
 
-Métodos de la clase jugador: 
-Función mover jugador(tecla){ 
- En función de la tecla se aumenta o disminuye la posición del jugador correspondiente.  
-} 
+Métodos de la clase jugador:  
+Función mover jugador(tecla){  
+   En función de la tecla se aumenta o disminuye la posición del jugador correspondiente.  
+}  
 
-Función colisión(numJug, x, y){ 
- Comprobar que el jugador no está en casilla -1. Si sí, el jugador "muere". Llamar a función Reiniciar jugador(de este jugador). 
- Comprobar que el jugador no está en línea(cualquier valor). Si sí, reiniciar el jugador del cual ha chocado.  
- ej:  
- colision(numJug, x, y){  
-  if(array_casillas[x][y]== -1){  
-   reiniciarJugador(n);  
-  }  
-  if(array_linea[x][y]!=0){  
-   reiniciarJugador(array_linea[x][y]);  
-  }  
- }  
+Función colisión(numJug, x, y){  
+   Comprobar que el jugador no está en casilla -1. Si sí, el jugador "muere". Llamar a función Reiniciar jugador(de este jugador).  
+   Comprobar que el jugador no está en línea(cualquier valor). Si sí, reiniciar el jugador del cual ha chocado.  
+   ej:  
+````
+   colision(numJug, x, y){  
+     if(array_casillas[x][y]== -1){  
+     reiniciarJugador(n);  
+     }  
+     if(array_linea[x][y]!=0){  
+       reiniciarJugador(array_linea[x][y]);  
+     }  
+   }  
+```
 }  
 
 Función inicializar Jugador(numJug, x, y){  
- Poner jugador en x, y.  
- Llamar a pintar alrededor de tablero.  
+   Poner jugador en x, y.  
+   Llamar a pintar alrededor de tablero.  
 }  
 
-Función ReiniciarJugador(numJug){  
- Cuando "mueres".  
- Reiniciar flag.  
- Calcular aleatoriamente una x e y (que no esté al lado del borde ni sobre un jugador).  
- Llamar a borrarDeUnJugador de la clase tablero.  
- Llamar a inicializar jugador con los valores x e y.  
- Lllamar a pintar alrededor de la clase tablero.  
+Función ReiniciarJugador(numJug){   
+   Cuando "mueres".  
+   Reiniciar flag.  
+   Calcular aleatoriamente una x e y (que no esté al lado del borde ni sobre un jugador).    
+   Llamar a borrarDeUnJugador de la clase tablero.  
+   Llamar a inicializar jugador con los valores x e y.  
+   Llamar a pintar alrededor de la clase tablero.  
 }  
 
 Función updatePuntos(){  
- Llamar a la función contar casillas de la clase tablero.  
- Calcular el porcentaje.  
+   Llamar a la función contar casillas de la clase tablero.  
+   Calcular el porcentaje.  
 }  
 
 Función Capturar(n){  
- Calcular BoundingBox (encontrar los extremos de línea y territorio) y ampliar 1.  
- Encontrar lo de fuera.  
- Pintar lo de dentro.  
- Borrar la línea.  
+   Calcular BoundingBox (encontrar los extremos de línea y territorio) y ampliar 1.  
+   Encontrar lo de fuera.  
+   Pintar lo de dentro.  
+   Borrar la línea.  
 }  
 
 Función comprobar si se está fuera y rellenar nueva área(){  
  Detectar que no está el jugador en el territorio. Empezar a pintar línea.  
  Si estoy fuera  
+ ```
   if(territorio != jugador){  
-   flag a true.  
-   pintar linea[x][y] a jugador  
+    flag a true.  
+    pintar linea[x][y] a jugador  
   }  
   else{  
-   if(flag == true){  
-    llamar a función Capturar  
-    flag a false.//Para que no calcule el capturar todo el rato cuando que el jugador se encuentra en su territorio.  
-   }  
-  }  
+     if(flag == true){  
+       llamar a función Capturar  
+       flag a false.//Para que no calcule el capturar todo el rato cuando que el jugador se encuentra en su territorio.  
+     }  
+   }    
+```
 }  
+
 Bucle de control{  
- Borrar todo las gráficas.  
- Pintar las gráfica nuevas.  
- Comprobar el tiempo.  
- Comprobar el estado de los jugadores (colisiones, el método de comprobar si el jugador está fuera de su territorio, actualizar las puntuaciones).  
- Comprobar inputs (ej: movimiento de jugadores).  
+   Borrar todo las gráficas.  
+   Pintar las gráfica nuevas.  
+   Comprobar el tiempo.  
+   Comprobar el estado de los jugadores (colisiones, el método de comprobar si el jugador está fuera de su territorio, actualizar las puntuaciones).  
+   Comprobar inputs (ej: movimiento de jugadores).  
 }  
