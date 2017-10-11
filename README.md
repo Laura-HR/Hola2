@@ -56,13 +56,13 @@ Ahora este representado en clases y métodos que el juego tiene que tener:
 ```
 Clase- Tablero. 
 Array de casillas de: 
-- Array de int de territorio/casillas
+- Array de int de territorio/casillas ✓
 -1 == borde. 
 0 == en blanco, casilla de nadie. 
 1 == jugador 1. 
 2 == jugador 2.  
 
-- Array de int de linea
+- Array de int de linea ✓
 0 == de nadie. 
 1 == captura de jugador 1. 
 2 == captura de jugador 2.  
@@ -72,7 +72,7 @@ Métodos de clase Tablero:
  el color depende del array de territorio.   
 }  
 
-Método de inicializar Partida{  
+Método de inicializar Partida{ ✓
    Ejecutar antes de empezar la partida.  
    Se pone todo a 0 (en blanco) y -1 (los bordes del tablero) por defecto.  
 }  
