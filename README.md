@@ -82,11 +82,11 @@ Función pintar alrededor(x, y, numJug){ ✓
    tiene que quedar un cuadrado de 3x3.  
 }  
 
-Función borrarDeUnJugador(numJug){  
+Función borrarDeUnJugador(numJug){
    Poner 0 todo territorio y linea de numJug.  
 }  
 
-Función contar casillas(numJug){ 
+Función contar casillas(numJug){ ✓
    Recorrer todo el array de casillas y contar las casillas que pertenecen a un jugador. Devuelve contador de casillas.  
 } 
 
