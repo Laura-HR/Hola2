@@ -82,7 +82,7 @@ Función pintar alrededor(x, y, numJug){ ✓
    tiene que quedar un cuadrado de 3x3.  
 }  
 
-Función borrarDeUnJugador(numJug){
+Función borrarDeUnJugador(numJug){ //FALTA LÍNEA
    Poner 0 todo territorio y linea de numJug.  
 }  
 
