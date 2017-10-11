@@ -68,7 +68,7 @@ Array de casillas de:
 2 == captura de jugador 2.  
 
 Métodos de clase Tablero: 
-   Método de pintar casilla(numJug, x, y){ //numJug (nº de jug), x (pos x de la casilla a pintar), y (pos y de la casilla a pintar)  
+Método de pintar casilla(numJug, x, y){ //numJug (nº de jug), x (pos x de la casilla a pintar), y (pos y de la casilla a pintar) ✓  
  el color depende del array de territorio.   
 }  
 
