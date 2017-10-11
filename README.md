@@ -86,7 +86,7 @@ Función borrarDeUnJugador(numJug){ //FALTA LÍNEA
    Poner 0 todo territorio y linea de numJug.  
 }  
 
-Función contar casillas(numJug){ ✓
+Función contar casillas(numJug){
    Recorrer todo el array de casillas y contar las casillas que pertenecen a un jugador. Devuelve contador de casillas.  
 } 
 
@@ -101,11 +101,11 @@ Puntuación.
 Flag hay que pintar.  
 
 Métodos de la clase jugador:  
-Función mover jugador(tecla){  
+Función mover jugador(tecla){ ✓
    En función de la tecla se aumenta o disminuye la posición del jugador correspondiente.  
 }  
 
-Función colisión(numJug, x, y){  
+Función colisión(numJug, x, y){ //SOLO COLISIÓN CON EL BORDE
    Comprobar que el jugador no está en casilla -1. Si sí, el jugador "muere". Llamar a función Reiniciar jugador(de este jugador).  
    Comprobar que el jugador no está en línea(cualquier valor). Si sí, reiniciar el jugador del cual ha chocado.  
    ej:  
@@ -119,12 +119,12 @@ Función colisión(numJug, x, y){
    }
 }  
 
-Función inicializar Jugador(numJug, x, y){  
+Función inicializar Jugador(numJug, x, y){ ✓
    Poner jugador en x, y.  
    Llamar a pintar alrededor de tablero.  
 }  
 
-Función ReiniciarJugador(numJug){   
+Función ReiniciarJugador(numJug){ 
    Cuando "mueres".  
    Reiniciar flag.  
    Calcular aleatoriamente una x e y (que no esté al lado del borde ni sobre un jugador).    
@@ -160,7 +160,7 @@ Función comprobar si se está fuera y rellenar nueva área(){
    } 
 }  
 
-Bucle de control{  
+Bucle de control{ 
    Borrar todo las gráficas.  
    Pintar las gráfica nuevas.  
    Comprobar el tiempo.  
