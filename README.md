@@ -77,7 +77,7 @@ Método de inicializar Partida{ ✓
    Se pone todo a 0 (en blanco) y -1 (los bordes del tablero) por defecto.  
 }  
 
-Función pintar alrededor(x, y, numJug){  
+Función pintar alrededor(x, y, numJug){ ✓
    Cambiar valor array territorio/casilla a numJug alreadedor de x e y.  
    tiene que quedar un cuadrado de 3x3.  
 }  
