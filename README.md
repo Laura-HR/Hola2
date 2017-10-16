@@ -82,7 +82,7 @@ Función pintar alrededor(x, y, numJug){ ✓
    tiene que quedar un cuadrado de 3x3.  
 }  
 
-Función borrarDeUnJugador(numJug){ //FALTA LÍNEA
+Función borrarDeUnJugador(numJug){ ✓
    Poner 0 todo territorio y linea de numJug.  
 }  
 
@@ -90,7 +90,7 @@ Función contar casillas(numJug){
    Recorrer todo el array de casillas y contar las casillas que pertenecen a un jugador. Devuelve contador de casillas.  
 } 
 
-Función pintar línea(numJug, x, y){ 
+Función pintar línea(numJug, x, y){ ✓
    El color depende del array linea.  
 } 
 
@@ -103,7 +103,10 @@ Flag hay que pintar.
 Métodos de la clase jugador:  
 Función mover jugador(tecla){ ✓
    En función de la tecla se aumenta o disminuye la posición del jugador correspondiente.  
-}  
+}
+//////////PROBLEMAS SOBRE MOVER JUGADOR:
+//////////NO SE PERMITE EL MOVIMIENTO SIMULTÁNEO DE JUGADORES
+///////// LOS CONTROLES NO FUNCIONAN PARA TODOS LOS NAVEGADORES (funcionan bien en Firefox)
 
 Función colisión(numJug, x, y){ //SOLO COLISIÓN CON EL BORDE
    Comprobar que el jugador no está en casilla -1. Si sí, el jugador "muere". Llamar a función Reiniciar jugador(de este jugador).  
@@ -138,14 +141,14 @@ Función updatePuntos(){
    Calcular el porcentaje.  
 }  
 
-Función Capturar(n){  
+Función Capturar(n){ //SOLO BOUNDING BOX
    Calcular BoundingBox (encontrar los extremos de línea y territorio) y ampliar 1.  
    Encontrar lo de fuera.  
    Pintar lo de dentro.  
    Borrar la línea.  
 }  
 
-Función comprobar si se está fuera y rellenar nueva área(){  
+Función comprobar si se está fuera y rellenar nueva área(){ ✓
  Detectar que no está el jugador en el territorio. Empezar a pintar línea.  
  Si estoy fuera  
   if(territorio != jugador){  
