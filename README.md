@@ -108,7 +108,7 @@ Función mover jugador(tecla){ ✓
 //////////NO SE PERMITE EL MOVIMIENTO SIMULTÁNEO DE JUGADORES
 ///////// LOS CONTROLES NO FUNCIONAN PARA TODOS LOS NAVEGADORES (funcionan bien en Firefox)
 
-Función colisión(numJug, x, y){ //SOLO COLISIÓN CON EL BORDE
+Función colisión(numJug, x, y){ ✓
    Comprobar que el jugador no está en casilla -1. Si sí, el jugador "muere". Llamar a función Reiniciar jugador(de este jugador).  
    Comprobar que el jugador no está en línea(cualquier valor). Si sí, reiniciar el jugador del cual ha chocado.  
    ej:  
@@ -127,7 +127,7 @@ Función inicializar Jugador(numJug, x, y){ ✓
    Llamar a pintar alrededor de tablero.  
 }  
 
-Función ReiniciarJugador(numJug){ 
+Función ReiniciarJugador(numJug){ ✓
    Cuando "mueres".  
    Reiniciar flag.  
    Calcular aleatoriamente una x e y (que no esté al lado del borde ni sobre un jugador).    
