@@ -86,7 +86,7 @@ Función borrarDeUnJugador(numJug){ ✓
    Poner 0 todo territorio y linea de numJug.  
 }  
 
-Función contar casillas(numJug){
+Función contar casillas(numJug){ ✓
    Recorrer todo el array de casillas y contar las casillas que pertenecen a un jugador. Devuelve contador de casillas.  
 } 
 
@@ -136,7 +136,7 @@ Función ReiniciarJugador(numJug){ ✓
    Llamar a pintar alrededor de la clase tablero.  
 }  
 
-Función updatePuntos(){  
+Función updatePuntos(){ ✓
    Llamar a la función contar casillas de la clase tablero.  
    Calcular el porcentaje.  
 }  
