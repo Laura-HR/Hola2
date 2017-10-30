@@ -171,19 +171,3 @@ Bucle de control{
    Comprobar inputs (ej: movimiento de jugadores).  
 }  
 ```
-
-**Menú Principal:**
-Menú que aparece cuando se abre la aplicación. Muestra el título del videojuego (Snake.io) y dos botones. Desde el botón de la derecha se accede a *Opciones* y desde el de la derecha se accede al *Menú de elección de color de jugador*.
-![alt text](https://raw.githubusercontent.com/lbarretop/Juegos-en-Red/3e619ceed75f8dd95107db7aa6d2264aaada40bc/Snake.io-master/capturas/menu.jpeg)
-
-**Opciones**
-Es un menú que muestra los controles principales del juego, que son el manejo del jugador mediante el ratón y el aumento de su velocidad al mantener la barra espaciadora pulsada. Este menú también muestra una opción de poder silenciar los efectos de sonido o a activarlos mediante un botón. Desde el *Opciones* se puede volver al *Menú Principal* mediante a un botón situado en al esquina inferior izquierda.
-
-**Menú de elección de color del Jugador**
-Menú que permite al juagdor elegir el color que desea para su personaje. Puede elegir entre 4 colores (rojo, azul, verde y amarillo) pulsando su botón correspondiente. Tras pulsar el botón comienza el *Gameplay* del juego.
-
-**Gameplay**
-Es la parte del juego donde se desarrolla la jugabilidad. Se muestran 3 *snakes* por pantalla, en donde una de ellas pertenece al jugador y las otras dos son bots. El jugador maneja a su personaje mediante el ratón, y al colisionar con la *comida* esparcida por todo el tablero aumentará su tamaño. Si el snake del jugador colisiona con alguno de los otros snakes, habrá perdido la partida y se mostrará automáticamente el *Menú de Reinicio*. También se mostrará este menú si el snake jugador es el único jugador en el tablero.
-
-**Menú de Reinicio**
-Menú que muestra "You won!" o "You lost!" dependiendo del resultado del Gameplay. También aparece en este menú dos botones: el primero (izquierda) que accede a *Menú de elección del color del Jugador* para empezar una partida de nuevo y el segundo (derecha) que accede al *Menú Principal*.
