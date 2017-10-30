@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Prueba Snake.io </title>
+<meta name="author" content="X">
+<meta name="fecha" content="26/09/2017">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body bgcolor="#ffffff">
+
+	<div id='d1' style="position:absolute; top:110px; left:50px">
+		<canvas id="micanvas" width="1820" height="780"></canvas>
+	</div>
+	
+	<img id="jugador" width="0" height="0" src="extras/BOX1.png">
+
+<script type="text/javascript">
+
+	//function inicializar_canvas() {
+		var canvas_tablero = document.getElementById("micanvas");
+		var context = canvas_tablero.getContext('2d');
+
+		var canvas_tamx = 1820; //Variable global que tiene el valor X del canvas -- se puede modificar esta variable;
+		var canvas_tamy = 780; //Variable global que tiene el valor Y del canvas -- se puede modificar esta variable;
+			
+		var num_cuadrosX= 100;
+		
+		var pixel_sizex = Math.floor(canvas_tamx/num_cuadrosX);
+		var pixel_sizey = pixel_sizex;
+		
+		var num_cuadrosY= Math.floor(canvas_tamy/pixel_sizey);
+		
+		var resto_x= Math.round((canvas_tamx - (pixel_sizex*num_cuadrosX))/2);
+		var resto_y= Math.round((canvas_tamy - (pixel_sizey*num_cuadrosY))/2);
+		
+		canvas_tablero.width  = canvas_tamx;
+		canvas_tablero.height = canvas_tamy;
+
+		context.strokeStyle = "#bfbfbf";
+		
+		for (i=0; i<num_cuadrosX; i+=1){ //Dibujar la líneas dentro del canvas;
+				for (j=0; j<num_cuadrosY; j+=1){
+					context.strokeRect((i*pixel_sizex)+resto_x, (j*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+					
+				}     
+		}
+	//}
+	var array_jug = new Array(100);
+	function inicializar_jug(){
+		console.log(num_cuadrosX);
+		console.log(num_cuadrosY);
+		//Se crea un array de jugadores del tamaño del canvas (cuadros por ancho*cuadros por alto) = (num_cuadrosX*num_cuadrosY) = (100*43)
+		//var array_jug = new Array(100);
+		for (i = 0; i < 100; i++) {
+			array_jug[i] = new Array(43);
+			for (j = 0; j < 43; j++) {
+				array_jug[i][j] = 0;
+			}
+		}
+		
+		//Array que guarda los valores de la línea que deja el jugador en el canvas;
+		var array_jug_linea = new Array(100);
+		for (i = 0; i < 100; i++) {
+			array_jug_linea[i] = new Array(43);
+			for (j = 0; j < 43; j++) {
+				array_jug_linea[i][j] = 0;
+			}
+		}
+		
+		var jug_posx= (pixel_sizex* 4) + resto_x; //Se pintará en la celda 4 (5 en pantalla porque el array comienza en 0);
+		var jug_posy= (pixel_sizey* 4) + resto_y; //Se pintará en la celda 4 (5 en pantalla porque el array comienza en 0);
+		
+		//var img_jug = document.getElementById("jugador");
+		//context.drawImage(img_jug, jug_posx, jug_posy, pixel_sizex, pixel_sizey);
+		
+		context.fillStyle = "#51b0ff";
+		context.fillRect(jug_posx, jug_posy, pixel_sizex, pixel_sizey); //Se pinta gráficamente el jugador;
+		
+		array_jug[5][5]= 1;
+	}
+	function Partida(){
+		//inicializar_canvas();
+		inicializar_jug();
+		
+		document.onkeydown = mover_jug;
+		function mover_jug(e){
+			var evento = window.event || e;
+			console.log(evento.keyCode);
+			
+			for (i = 0; i < 99; i++) {
+					for (j = 0; j < 43; j++) {
+						if(array_jug[i][j]== 1){
+							array_jug[i+1][j]== 1;
+						}
+					}
+			}
+		
+		}
+		
+		function pintar_jug(){
+			for (i = 0; i < 100; i++) {
+					for (j = 0; j < 43; j++) {
+						var jug_posx= (pixel_sizex* i) + resto_x;
+						var jug_posy= (pixel_sizey* j) + resto_y;
+						
+						if(array_jug[i][j]== 0){//Borrar todo o borrar solo los cuadrados??
+							context.clearRect(jug_posx, jug_posy, pixel_sizex, pixel_sizey);
+						}
+						else{						
+							context.fillStyle = "#51b0ff";
+							context.fillRect(jug_posx, jug_posy, pixel_sizex, pixel_sizey);
+						}
+					}
+			}
+		}
+		
+		function animation(){
+			mover_jug();
+			pintar_jug();
+			
+			requestAnimationFrame(animation); //Se actualiza la animación
+		}
+	}
+	function empezar_partida(){
+		Partida();
+	}
+	empezar_partida();
+	/*
+	function Partida() {
+	}//Fin de partida;
+	*/
+</script>
+</body>
+</html>
