@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Prueba Snake.io </title>
+<meta name="author" content="X">
+<meta name="fecha" content="26/09/2017">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body bgcolor="#ffffff">
+
+	<div id='d1' style="position:absolute; top:110px; left:50px">
+		<canvas id="micanvas" width="1820" height="780" style="border: 1px solid #bfbfbf;"></canvas>
+	</div>
+
+<script type="text/javascript">
+
+	function inicializar_canvas() {
+		var elemento = document.getElementById("micanvas");
+		var contexto = elemento.getContext('2d');
+
+		var canvas_tamx = 1820; //Variable global que tiene el valor X del canvas -- se puede modificar esta variable;
+		var canvas_tamy = 780; //Variable global que tiene el valor Y del canvas -- se puede modificar esta variable;
+			
+		var num_cuadrosX= 100;
+		
+		var pixel_x = Math.floor(canvas_tamx/num_cuadrosX);
+		var pixel_y = pixel_x;
+		
+		var num_cuadrosY= Math.floor(canvas_tamy/pixel_y);
+		
+		var resto_x= Math.round((canvas_tamx - (pixel_x*num_cuadrosX))/2);
+		var resto_y= Math.round((canvas_tamy - (pixel_y*num_cuadrosY))/2);
+		
+		elemento.width  = canvas_tamx;
+		elemento.height = canvas_tamy;
+
+		contexto.strokeStyle = "#bfbfbf";
+		
+		for (i=0; i<num_cuadrosX; i+=1){ //Dibujar la líneas dentro del canvas;
+				for (j=0; j<num_cuadrosY; j+=1){
+					contexto.strokeRect((i*pixel_x)+resto_x, (j*pixel_y)+resto_y, pixel_x, pixel_y);
+					
+				}     
+		}
+		console.log(num_cuadrosY);
+		//Se crea un array de jugadores del tamaño del canvas (cuadros por ancho*cuadros por alto) = (num_cuadrosX*num_cuadrosY) = (100*)
+		var array_jug = new Array(100);
+		for (i = 0; i < 100; i++) {
+			array_jug[i] = new Array(80);
+			for (j = 0; j < 80; j++) {
+				array_jug[i][j] = 0;
+			}
+		}
+		
+	}
+	/*
+	function Partida() {
+	}//Fin de partida;
+	*/
+	
+	/*
+	var array_celulas = new Array(80);
+		for (i = 0; i < 80; i++) {
+			array_celulas[i] = new Array(80);
+			for (j = 0; j < 80; j++) {
+				array_celulas[i][j] = 0;
+			}
+		}
+	document.onkeydown = mover_jugador;
+	var posx_jugador= 220; //Pos x inicial del jugador;
+	var posy_jugador= 500; //Pos y inicial del jugador;
+	function mover_jugador(e) { //Evento de teclado que controla la pos x del jugador;
+		var evento = window.event || e;
+		//console.log(evento.keyCode);
+		if(evento.keyCode == 39){ //Si se pulsa la tecla de la flecha derecha se mueve el jugador hacia la derecha;
+			if(posx_jugador>=30 && posx_jugador<=430){
+				posx_jugador+= 5;
+				if(posx_jugador<=30){ //Se definen unos limites para que el jugador no salga del tablero de juego;
+					posx_jugador= 30;
+				}
+				else{
+					 if(posx_jugador>=430){
+						posx_jugador=430;
+					 }
+				}
+			}
+		}
+		if(evento.keyCode == 37){ //Si se pulsa la tecla de la flecha izquierda se mueve el jugador hacia la izquierda;
+			if(posx_jugador>=30 && posx_jugador<=430){
+				posx_jugador-= 5;
+				if(posx_jugador<=30){
+					posx_jugador= 30;
+				}
+				else{
+					 if(posx_jugador>=430){
+						posx_jugador=430;
+					 }
+				}
+			}
+		}
+	}
+	*/
+</script>
+</body>
+</html>
