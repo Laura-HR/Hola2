@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Snake.io </title>
+<meta name="author" content="X">
+<meta name="fecha" content="26/09/2017">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body bgcolor="#ffffff">
+
+	<div id='d1' style="position:absolute; top:110px; left:50px">
+		<canvas id="micanvas" width="1820" height="780"></canvas>
+	</div>
+	<div id='d2' style="position:absolute; top:0px; left:0px">
+		<canvas id="canvas_menu" width="1500" height="820"></canvas>
+	</div>
+	
+	<img id="jugador" width="0" height="0" src="extras/BOX1.png">
+
+<script type="text/javascript">
+
+	var canvas_menu = document.getElementById("canvas_menu");
+	var context_menu = canvas_menu.getContext('2d');
+	
+	var canvas_tablero = document.getElementById("micanvas");
+	var context_tablero = canvas_tablero.getContext('2d');
+	
+	var estado= 1;
+	
+	//ESTADOS
+	//Estado 1- MENÚ
+	function inicializar_menu(){
+		estado= 1;
+		context_menu.fillStyle = "#719b75";
+		context_menu.fillRect(0,0,canvas_menu.width,canvas_menu.height);
+		
+		context_menu.fillStyle = "#527255";
+		context_menu.textAlign = "center";
+		context_menu.font = "100px Arial";
+		context_menu.fillText("Menú", canvas_menu.width/2, canvas_menu.height/2); 
+	}
+	//Estado 2 - JUEGO
+	function inicializar_juego(){
+		estado= 2;
+		var tablero= new Tablero();
+		console.log(Tablero.array_territorio);
+		Tablero.prototype.inicializar_tablero();
+		
+		var j1= new Jugador();
+	}
+	
+	inicializar_menu();
+	window.addEventListener("keypress", gestion_tecla, false);
+	function gestion_tecla(e) {
+		console.log(e.keyCode);
+		switch(estado){
+			case 1:
+				menu_tecla(e.keyCode);
+				break;
+		}
+	}
+	function menu_tecla(tecla){
+		if(tecla== 13){ //Enter
+			context_menu.clearRect(0, 0, canvas_menu.width, canvas_menu.height);
+			inicializar_juego();
+		}
+		if(tecla == 48){ //0
+			context_tablero.clearRect(0, 0, canvas_tablero.width, canvas_tablero.height);
+			inicializar_menu();
+		}
+	}
+	
+	///CLASE TABLERO
+	function Tablero () {
+		this.array_territorio= new Array(100);
+		this.array_linea= new Array(100);
+		
+		for (i = 0; i < 100; i++) {
+			this.array_territorio[i] = new Array(43);
+			for (j = 0; j < 43; j++) {
+				this.array_territorio[i][j] = 0;
+			}
+		}
+		
+		for (i = 0; i < 100; i++) {
+			this.array_linea[i] = new Array(43);
+			for (j = 0; j < 43; j++) {
+				this.array_linea[i][j] = 0;
+			}
+		}
+	}
+	Tablero.prototype.inicializar_tablero= function() {
+		var that= this; 
+		var canvas_tamx = 1820; //Variable que tiene el valor X del canvas
+		var canvas_tamy = 780; //Variable que tiene el valor Y del canvas
+			
+		var num_cuadrosX= 100;
+		
+		var pixel_sizex = Math.floor(canvas_tamx/num_cuadrosX);
+		var pixel_sizey = pixel_sizex;
+		
+		var num_cuadrosY= Math.floor(canvas_tamy/pixel_sizey);
+		
+		var resto_x= Math.round((canvas_tamx - (pixel_sizex*num_cuadrosX))/2);
+		var resto_y= Math.round((canvas_tamy - (pixel_sizey*num_cuadrosY))/2);
+		
+		canvas_tablero.width  = canvas_tamx;
+		canvas_tablero.height = canvas_tamy;
+
+		context_tablero.strokeStyle = "#bfbfbf";
+		context_tablero.fillStyle = "#ededed";
+		
+		//PINTAR LOS BORDES
+		for (i=0; i<num_cuadrosX; i++){
+			for (j=0; j<1; j++){
+				//context_tablero.fillRect((i*pixel_sizex)+resto_x, (j*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+				that.array_territorio[i][j]= -1;
+			}
+			for (j=num_cuadrosY- 1; j<num_cuadrosY; j++){
+				//context_tablero.fillRect((i*pixel_sizex)+resto_x, (j*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+				that.array_territorio[i][j]= -1;
+			}
+		}
+		for (j=0; j<num_cuadrosY; j++){
+			for (i=0; i<1; i++){
+				//context_tablero.fillRect((i*pixel_sizex)+resto_x, (j*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+				that.array_territorio[i][j]= -1;
+			}
+			for (i=num_cuadrosX-1; i<num_cuadrosX; i++){
+				//context_tablero.fillRect((i*pixel_sizex)+resto_x, (j*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+				that.array_territorio[i][j]= -1;
+			}
+		}
+		
+		//PINTAR LAS LÍNEAS DEL TABLERO
+		for (i=0; i<num_cuadrosX; i++){
+			for (j=0; j<num_cuadrosY; j++){
+				if(that.array_territorio[i][j] == -1){
+					context_tablero.fillRect((i*pixel_sizex)+resto_x, (j*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+				}
+				context_tablero.strokeRect((i*pixel_sizex)+resto_x, (j*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+			}     
+		}		
+	}
+	Tablero.prototype.pintar_casilla= function(n, x, y) {
+		var that= this;
+		for (i=0; i<num_cuadrosX; i++){
+			for (j=0; j<num_cuadrosY; j++){
+				switch(that.array_territorio[i][j]){
+					case 0:
+						context_tablero.fillStyle = "#ffffff";
+						break;
+					case 1:
+						context_tablero.fillStyle = "#5fd3e2";
+						break;
+					case 2:
+						context_tablero.fillStyle = "#8f5fe2";
+						break;								
+					case 3:
+						context_tablero.fillStyle = "#3e78c4";
+						break;
+					case 4:
+						context_tablero.fillStyle = "#410587";
+						break;
+						
+					context_tablero.fillRect((i*pixel_sizex)+resto_x, (j*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+				}
+			}     
+		}
+	}
+	
+	function Jugador(){
+		this.posx;
+		this.posy;
+		this.puntuacion;
+	}
+	////
+</script>
+</body>
+</html>
