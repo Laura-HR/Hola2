@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Snake.io </title>
+<meta name="author" content="X">
+<meta name="fecha" content="26/09/2017">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body bgcolor="#2c2c2c">
+
+	<div id='d1' style="position:absolute; top:110px; left:50px">
+		<canvas id="micanvas" width="1820" height="780"></canvas>
+	</div>
+	<div id='d2' style="position:absolute; top:0px; left:0px">
+		<canvas id="canvas_menu" width="1900" height="920"></canvas>
+	</div>
+	<div id='d2' style="position:absolute; top:0px; left:0px">
+		<canvas id="canvas_cabecera_juego" width="1900" height="920"></canvas>
+	</div>
+	
+	<img id="logo" width="0" height="0" src="Interfaz_juego/logo_principal.png" alt="Snake.io">
+
+<script type="text/javascript">
+	//CANVAS PARA LA PANTALLA MENU
+	var canvas_menu = document.getElementById("canvas_menu");
+	var context_menu = canvas_menu.getContext('2d');
+	canvas_menu.style.width = window.innerWidth+ "px";
+    canvas_menu.style.height = window.innerHeight+ "px";
+	
+	//CANVAS PARA EL TABLERO (PANTALLA JURGO)
+	var canvas_tablero = document.getElementById("micanvas");
+	var context_tablero = canvas_tablero.getContext('2d');
+	
+	//CARGAR IMÁGENES
+	var img_logo = document.getElementById("logo");
+	
+	//Se crea un Array de jugadores. De momento es un Array de 2 jugadores.
+	var estado= 1;
+	var jug= new Array(2);
+	for(i= 0; i<jug.length; i++){
+		jug[i]= new Jugador(2*(i+1), 2*(i+1), i+1);
+	}
+	
+	
+	//ESTADO DE JUEGO
+	//Estado 1- MENÚ
+	function dibujar_menu(){	
+		//El color del fondo del menú
+		/*
+		context_menu.fillStyle = "#5fd3e2";
+		context_menu.fillRect(0,0,canvas_menu.width,canvas_menu.height);
+		context_menu.fillStyle = "#ffffff";
+		*/
+		context_menu.drawImage(img_logo, 30, 30, 210, 36);
+		//El texto del menú
+		context_menu.textAlign = "center";
+		context_menu.font = "100px Arial";
+		context_menu.fillText("Menú", canvas_menu.width/2, canvas_menu.height/2);
+	}
+	
+	//Estado 2 - JUEGO
+	function inicializar_juego(){
+		//Se inicializa el tablero y los jugadores
+		inicializar_tablero();
+		jug[0].inicializar_jug(7,7);
+		jug[1].inicializar_jug(num_cuadrosX-7,num_cuadrosY-7);
+	}
+	//////////////////////////////////////////////////////////////////////////////GESTIÓN TECLA
+	//Se gestionan las teclas según el estado en el que estemos para que podamos utilizar las mismas teclas para diferentes estados
+	window.addEventListener("keypress", gestion_tecla, false);
+	function gestion_tecla(e) {
+		var charCode = e.which || e.charCode || e.keyCode || 0;
+		console.log(charCode);
+		switch(estado){
+			case 1:
+				menu_tecla(charCode);
+				break;
+			case 2:
+				juego_tecla(charCode);
+				break;
+		}
+	}
+	//////////////////////////////////////////////////////////////////////////////MENÚ TECLA/JUEGO TECLA
+	//Las fucniones que se realizan al pulsar una tecla si estamos en estado "menú"
+	function menu_tecla(tecla){
+		if(tecla== 13){ //Enter. Al pulsar la tecla "Enter", comienza el juego
+			estado= 2;
+			context_menu.clearRect(0, 0, canvas_menu.width, canvas_menu.height);
+			inicializar_juego();
+		}
+	}
+	//Las fucniones que se realizan al pulsar una tecla si estamos en estado "juego"
+	function juego_tecla(tecla){
+		if(tecla == 48){ //0. Al pulsar la tecla "0", se regresa al menú
+			estado= 1;
+			context_tablero.clearRect(0, 0, canvas_tablero.width, canvas_tablero.height);
+			//inicializar_menu();
+		}
+		switch(tecla){
+			//Para jugador 1
+			/*Movimiento del jugador. Se mueve el jugador dependiendo del sentido del movimiento y se comprueba colisiones, es decir. Un jugador se mueve, si en la casilla donde el
+			jugador está es línea entonces se reinicia el jugador*/
+			case 119: //Arriba
+				jug[0].mover(0, -1);
+				comprobar_colision(jug[0]);
+				break;
+			case 97: //Izquierda
+				jug[0].mover(-1, 0);
+				comprobar_colision(jug[0]);
+				break;
+			case 100: //Derecha
+				jug[0].mover(1, 0);
+				comprobar_colision(jug[0]);
+				break;
+			case 115: //Abajo
+				jug[0].mover(0, 1);
+				comprobar_colision(jug[0]);
+				break;
+				
+			//Para jugador 2
+			case 38: //Arriba
+				jug[1].mover(0, -1);
+				comprobar_colision(jug[1]);
+				break;
+			case 37: //Izquierda
+				jug[1].mover(-1, 0);
+				comprobar_colision(jug[1]);
+				break;
+			case 39: //Derecha
+				jug[1].mover(1, 0);
+				comprobar_colision(jug[1]);
+				break;
+			case 40: //Abajo
+				jug[1].mover(0, 1);
+				comprobar_colision(jug[1]);
+				break;
+		}
+	}
+	//////////////////////////////////////////////////////////////////////////CLASE TABLERO
+	//Se crea un array territorio que ocupe todo el tablero (100x43 casillas). Aquí se almacenará a quién pertenece cada casilla del tablero
+	var array_territorio = new Array(100);
+	for (i = 0; i < array_territorio.length; i++) {
+		array_territorio[i] = new Array(43);
+		for (j = 0; j < array_territorio[i].length; j++) {
+				array_territorio[i][j] = 0;
+		}
+	}
+	
+	//Se crea un array línea que ocupe todo el tablero (100x43 casillas). Aquí se almacenará si existe línea en alguna casilla del tablero y a quién pertenece esa línea del tablero
+	var array_linea = new Array(100);
+	for (i = 0; i < array_linea.length; i++) {
+		array_linea[i] = new Array(43);
+		for (j = 0; j < array_linea[i].length; j++) {
+				array_linea[i][j] = 0;
+		}
+	}
+	
+	//Función que inicializa el tablero
+	function inicializar_tablero() {
+		var canvas_tamx = 1820; //Variable que tiene el valor X del canvas
+		var canvas_tamy = 780; //Variable que tiene el valor Y del canvas
+			
+		num_cuadrosX= 100;
+		
+		//Se calcula el tamaño de la casilla en x (pixel_sizex) y en y (pixel_sizey) haciendo la división entre el tamaño del canavas y el número de cuadros que queremos
+		//Como las casillas van a ser cuadradas, las altura de las casillas es igual que su ancho, por lo que pixel_sizex= pixel_sizey
+		pixel_sizex = Math.floor(canvas_tamx/num_cuadrosX);
+		pixel_sizey = pixel_sizex;
+		
+		//Calculamos el número de cuadros que va a tener nuestro tablero de altura, a partir de los datos anteriores
+		num_cuadrosY= Math.floor(canvas_tamy/pixel_sizey);
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		resto_x= Math.round((canvas_tamx - (pixel_sizex*num_cuadrosX))/2);
+		resto_y= Math.round((canvas_tamy - (pixel_sizey*num_cuadrosY))/2);
+		
+		//El tamaño de nuestro canvas será igual que al tamaño del tablero, apra que sea más fácil trabajar en él
+		canvas_tablero.width  = canvas_tamx;
+		canvas_tablero.height = canvas_tamy;
+		
+		//Se incializa todos los cuadrados a 0, es decir, estas casillas no son de ningún jugador por ahora
+		for (i=0; i<num_cuadrosX; i++){
+			for (j=0; j<num_cuadrosY; j++){
+				array_territorio[i][j]= 0;
+				array_linea[i][j]= 0;
+			}
+		}
+
+		
+		//Se pintan los bordes
+		for (i=0; i<num_cuadrosX; i++){
+			for (j=0; j<1; j++){
+				array_territorio[i][j]= -1;
+			}
+			for (j=num_cuadrosY- 1; j<num_cuadrosY; j++){
+				array_territorio[i][j]= -1;
+			}
+		}
+		for (j=0; j<num_cuadrosY; j++){
+			for (i=0; i<1; i++){
+				array_territorio[i][j]= -1;
+			}
+			for (i=num_cuadrosX-1; i<num_cuadrosX; i++){
+				array_territorio[i][j]= -1;
+			}
+		}
+		
+				
+	}
+	//Se pintan gráficamente el territorio y las lineas del tablero
+	function dibujar_tablero() {
+		for (i=0; i<num_cuadrosX; i++){
+			for (j=0; j<num_cuadrosY; j++){
+				pintar_casilla(i, j, array_territorio[i][j]);
+				pintar_linea(i, j, array_linea[i][j]);
+			}     
+		}
+	}
+	//función que pinta gráficamente el territorio del tablero. Se introducen la posición de la casilla y su valor en el array_territorio.
+	function pintar_casilla(x, y, numJug) {
+		switch(numJug){
+			case 0:
+				context_tablero.fillStyle = "#2c2c2c";
+				context_tablero.strokeStyle = "#202020";
+				break;			
+			case 1:
+				context_tablero.fillStyle = "#80c8bc";
+				context_tablero.strokeStyle = "#6ba99f";
+				break;
+			case 2:
+				context_tablero.fillStyle = "#dfb500";
+				context_tablero.strokeStyle = "#c7a200";
+				break;								
+			case 3:
+				context_tablero.fillStyle = "#9859a3";
+				context_tablero.strokeStyle = "#854d8f";
+				break;
+			case 4:
+				context_tablero.fillStyle = "#d98522";
+				context_tablero.strokeStyle = "#bf7216";
+				break;
+			default:
+				context_tablero.fillStyle = "#202020";
+				context_tablero.strokeStyle = "#202020";
+			
+		}
+		context_tablero.fillRect((x*pixel_sizex)+resto_x, (y*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+		context_tablero.strokeRect((x*pixel_sizex)+resto_x, (y*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+	}
+	//función que pinta gráficamente las líneas del tablero. Se introducen la posición de la casilla y su valor en el array_linea.
+	function pintar_linea(x, y, numJug){
+		switch(numJug){
+			case 1:
+				context_tablero.fillStyle = "#6ba99f";
+				context_tablero.strokeStyle = "#649c93";
+				break;
+			case 2:
+				context_tablero.fillStyle = "#b19000";
+				context_tablero.strokeStyle = "#b19000";
+				break;								
+			case 3:
+				context_tablero.fillStyle = "#794682";
+				context_tablero.strokeStyle = "#794682";
+				break;
+			case 4:
+				context_tablero.fillStyle = "#aa6513";
+				context_tablero.strokeStyle = "#aa6513";
+				break;
+			//default:
+				//context_tablero.fillStyle = "#ededed";
+				//context_tablero.strokeStyle = "#bfbfbf";
+		}
+		context_tablero.fillRect((x*pixel_sizex)+resto_x, (y*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+		context_tablero.strokeRect((x*pixel_sizex)+resto_x, (y*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+	}
+	//función que permite dar valor del array_territorio. Para ello se introducen la posición x e y a cambiar y el número del jugador o valor por el que se quiere cambiar
+	function setTerritorio(x, y, numJug){
+		array_territorio[x][y]= numJug;
+	}
+	//función que permite dar valor del array_linea. Para ello se introducen la posición x e y a cambiar y el número del jugador o valor por el que se quiere cambiar
+	function setLinea(x, y, numJug){
+		array_linea[x][y]= numJug;
+	}
+	//función que permite crear línea una vez que el jugador haya salido de su territorio
+	function crear_linea(x, y, numJug){
+		if(jug[numJug-1].jug_fuera_territorio()== 1){
+			setLinea(x, y, numJug);
+		}
+	}
+	//función que pinta una conjunto de 3x3 casillas alrededor de jugador. Suele utilizarse al inicializar jugador
+	function pintar_alrededor(x, y, numJug) {
+		var x_aux= x-1;
+		var y_aux= y-1;
+		for(i= 0; i< 3; i++){
+			x_aux = x-1;
+			for(j= 0; j< 3; j++){
+				if(array_territorio[x_aux][y_aux]!= -1){
+					setTerritorio(x_aux, y_aux, numJug);
+				}
+				x_aux++;
+			}
+			y_aux++;
+		}
+	}
+	//función que borra todo el territorio de un jugador en el tablero
+	function borrar_territorio_jug(numJug){
+		for(i=0; i< array_territorio.length; i++){
+			for(j=0; j < array_territorio[i].length; j++){
+				if(array_territorio[i][j]== numJug){
+					array_territorio[i][j]= 0;
+				}
+			}
+		}
+	}
+		//función que borra toda la línea de un jugador en el tablero
+	function borrar_linea_jug(numJug){
+		for(i=0; i< array_linea.length; i++){
+			for(j=0; j < array_linea[i].length; j++){
+				if(array_linea[i][j]== numJug){
+					array_linea[i][j]= 0;
+				}
+			}
+		}
+	}
+	/*
+	function contar_casillas(numJug){
+		var contador= 0;
+		for(i=0; i< array_territorio.length; i++){
+			for(j=0; j < array_territorio[i].length; j++){
+				if(array_territorio[i][j]== numJug){
+					contador++;
+				}
+			}
+		}
+		return contador;
+	}
+	*/
+	//función que comprueba la colisión del jugador con los bordes. Devuelve 1 si hay colisión. Devuelve 0 en caso contrario
+	function colision_jug_borde(jugador){
+		if(array_territorio[jugador.x][jugador.y]== -1){
+			return 1;
+		}
+		return 0;
+	}
+	//función que comprueba la colisión del jugador con línea de otros jugadores. Devuelve 1 si hay colisión. Devuelve 0 en caso contrario
+	function comprobar_colision(jugador){
+		if(array_linea[jugador.x][jugador.y]!=0){
+			jug[(array_linea[jugador.x][jugador.y])-1].reiniciar_jug();
+		}
+	}
+	//función en la que el jugador captura y amplía su territorio
+	function capturar_territorio(numJug){
+		//Crear Bounding Box
+		//x1,y1 - esquina superior izquierda
+		//x2,y2 - esquina inferior derecha
+		var x1;
+		var y1;
+		var x2;
+		var y2;
+		var salir= false;
+		//Se hacer 4 for (recorriendo el tablero desde arriba, derecha, izquierda y desde abajo). Con estos bucles, se da valor a x1, y1, x2, y2
+		for(i= 0; i<array_linea.length; i++){
+			for(j= 0; j<array_linea[i].length; j++){
+				if(array_linea[i][j]==numJug || array_territorio[i][j]==numJug){
+					x1= i;
+					salir= true;
+					break;
+				}
+			}
+			if(salir== true){
+				break;
+			}
+		}
+		salir= false;
+		for(j= 0; j<array_linea.length; j++){
+			for(i= 0; i<array_linea[j].length; i++){
+				if(array_linea[i][j]==numJug || array_territorio[i][j]==numJug){
+					y1= j;
+					salir= true;
+					break;
+				}
+			}
+			if(salir== true){
+				break;
+			}
+		}
+		salir= false;
+		for(i= array_linea.length-1; i>=0; i--){
+			for(j= array_linea[i].length-1; j>=0; j--){
+				if(array_linea[i][j]==numJug || array_territorio[i][j]==numJug){
+					x2= i;
+					salir= true;
+					break;
+				}
+			}
+			if(salir== true){
+				break;
+			}
+		}
+		salir= false;
+		for(j= array_linea.length-1; j>=0; j--){
+			for(i= array_linea[j].length-1; i>=0; i--){
+				if(array_linea[i][j]==numJug || array_territorio[i][j]==numJug){
+					y2= j;
+					salir= true;
+					break;
+				}
+			}
+			if(salir== true){
+				break;
+			}
+		}
+		console.log("x1= "+x1+" y1= "+y1);
+		console.log("x2= "+x2+" y2= "+y2);
+		//Se pinta gráficamente el Bouding Box con las coordenada que hemos calculado
+		for(i= x1; i<= x2; i++){
+			for(j= y1; j<= y2; j++){
+				setTerritorio(i, j, numJug);
+			}
+		}
+		//Se borra la línea del jugador que estaba capturando el territorio
+		borrar_linea_jug(numJug);
+	}
+	////////////////////////////////////////////////////////////////////FUNCIÓN JUGADOR
+	//Se crea la clase Jugador con posición x,y - número del jugador que es - puntuación - flag_ha_salido (esta flag sirve para que el código sea más eficiente)
+	function Jugador (x,y, numJug) {
+		this.x= x;
+		this.y= y;
+		this.numJug= numJug;
+		this.puntos= 0;
+		this.flag_ha_salido= false;
+	}
+	//función que dibuja gráficamente al jugador
+	Jugador.prototype.dibujar_jug= function(){
+		switch(this.numJug){
+			case 1:
+				context_tablero.fillStyle = "#314f4a";
+				break;
+			case 2:
+				context_tablero.fillStyle = "#604d00";
+				break;
+			case 3:
+				context_tablero.fillStyle = "#65396e";
+				break;
+			case 4:
+				context_tablero.fillStyle = "#9a5b10";
+				break;
+			default: 
+				context_tablero.fillStyle = "#000000";
+		}
+		context_tablero.fillRect((this.x*pixel_sizex)+resto_x, (this.y*pixel_sizey)+resto_y, pixel_sizex, pixel_sizey);
+	}
+	//función que inicializa al jugador en una posición que se introduce como parámetro
+	Jugador.prototype.inicializar_jug= function(x, y){
+		var that= this;
+		that.x= x;
+		that.y= y;
+		pintar_alrededor(that.x, that.y, that.numJug);
+	}
+	//función que reinicia al jugador en una posición aleatoria
+	Jugador.prototype.reiniciar_jug= function(){
+		this.flag_ha_salido= false;
+		var random_encontrado= false;
+		var x_aux;
+		var y_aux;
+		var contador= 0;
+		
+		borrar_territorio_jug(this.numJug);
+		borrar_linea_jug(this.numJug);
+		
+		do{
+			x_aux= Math.round(Math.random() * 100);
+			y_aux= Math.round(Math.random() * 43);
+			if(array_territorio[x_aux][y_aux]!= -1 && array_linea[x_aux][y_aux]==0){
+				if(array_territorio[x_aux][y_aux]==0 || contador>50){
+					random_encontrado= true;
+				}
+			}
+		}while(random_encontrado== false);
+		var that= this;
+		that.x= x_aux;
+		that.y= y_aux;
+		pintar_alrededor(that.x, that.y, that.numJug);
+	}
+	//función que mueve al jugador según los valores que se introducen como parámetro
+	Jugador.prototype.mover= function(x, y){
+		this.x+= x;
+		this.y+= y;
+	}
+	//función que devuelve 1 si el jugador está fuera de su propia área. Devuelve 0 en caso contrario
+	Jugador.prototype.jug_fuera_territorio= function(){
+		if(array_territorio[this.x][this.y]!=this.numJug){
+			this.flag_ha_salido= true;
+			return 1;
+		}
+		return 0;
+	}
+	//función que devuelve 1 si el jugador está dentro de su propia área. Devuelve 0 en caso contrario
+	Jugador.prototype.jug_dentro_territorio= function(){
+		if(array_territorio[this.x][this.y]==this.numJug){
+			return 1;
+		}
+		return 0;
+	}	//////////////////////////////////////////////////////////////////////////////////////////////////BUCLES PRINCIPALES
+	//////////////////////////////////////////////////////////////////////////////////////////////////BUCLE PINTAR
+	//función que pinta todos los elementos por pantalla. Dependiendo del estado en el que se esté (Menú - Juego - etc) se pintará los elementos correspondientes a ese estado
+	function drawAll(){
+		switch(estado){
+			case 1:
+				context_menu.clearRect(0, 0, canvas_menu.width, canvas_menu.height); //Borrar canvas;
+				dibujar_menu();
+				break;
+			case 2:
+				context_tablero.clearRect(0, 0, canvas_tablero.width, canvas_tablero.height);
+				dibujar_tablero();
+				for(i= 0; i< jug.length; i++){
+					jug[i].dibujar_jug();
+				}
+				break;
+		}
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////BUCLE ANIMACIÓN
+	//Bucle que actualiza las variables del juego.
+	var contador= 0;
+	function bucle_principal(tiempo){
+		requestAnimationFrame(bucle_principal);
+		contador++;
+		
+		for(i= 0; i < jug.length; i++){
+			crear_linea(jug[i].x, jug[i].y, i+1);
+		}
+				
+		jug.forEach(function(jugador, index) {
+			if(jugador.jug_dentro_territorio() == 1 && jugador.flag_ha_salido== true){
+				capturar_territorio(index+1);
+				jugador.flag_ha_salido= false;
+			}
+			if(colision_jug_borde(jugador)==1){
+				borrar_territorio_jug(index+1);
+				borrar_linea_jug(index+1);
+				jugador.reiniciar_jug();
+			}
+		});
+		drawAll();		 
+	}
+	//Start the animation.
+	requestAnimationFrame(bucle_principal);
+</script>
+</body>
+</html>

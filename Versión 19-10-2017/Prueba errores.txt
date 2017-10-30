@@ -1,0 +1,5 @@
+No funciona correctamente reiniciar....
+Se inicia en cualquier parte del tablero incluyendo los bordes.
+
+No funciona correctamente colision_jug_jug (solo al colisionar con el territorio).
+Juntar colisiones en 1 método?
